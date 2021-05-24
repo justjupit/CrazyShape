@@ -69,7 +69,31 @@ class MainActivity : AppCompatActivity() {
         val shape = intArrayOf(R.drawable.circle, R.drawable.square, R.drawable.triangle, R.drawable.star)
         val i:Int = (0..3).random()
         number.text = i.toString()
+        val img2: ImageView = findViewById(R.id.imgNext)
+        if(i==0){
+            GlideApp.with(this)
+                .load(shape[i])
+                .override(800,600)
+                .into(img2)
+        }
+        else if(i==1){
+            GlideApp.with(this)
+                .load(shape[i])
+                .override(800,600)
+                .into(img2)
+        }
+        else if(i==2){
+            GlideApp.with(this)
+                .load(shape[i])
+                .override(800,600)
+                .into(img2)
+        }
+        else if(i==3){
+            GlideApp.with(this)
+                .load(shape[i])
+                .override(800,600)
+                .into(img2)
+        }
 
-        imgNext.setImageResource(shape[i])
     }
 }
