@@ -14,13 +14,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 public final class MyAppGlideModule : AppGlideModule()
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        generates()
 
-        val shape = intArrayOf(R.drawable.circle, R.drawable.square, R.drawable.triangle, R.drawable.star)
-        val i:Int = (0..3).random()
-        imgNext.setImageResource(shape[i])
 
         val img: ImageView = findViewById(R.id.imgTitle)
         GlideApp.with(this)
@@ -28,34 +27,34 @@ class MainActivity : AppCompatActivity() {
             .override(800,600)
             .into(img)
 
-
-
-        Toast.makeText(this,"Author = 陳義德",Toast.LENGTH_LONG).show()
+        Toast.makeText(this,"Author = 陳義德",Toast.LENGTH_SHORT).show()
 
         imgNext.setOnClickListener(object: View.OnClickListener{
             override fun onClick(v: View?) {
-                imgNext.setImageResource(shape[i])
+
+                generates()
+
             }
         })
 
         imgNext.setOnLongClickListener(object: View.OnLongClickListener{
             override fun onLongClick(p0: View): Boolean {
-
                 intent = Intent(this@MainActivity,GameActivity::class.java).apply{
-                    if (shape[i]==0){
-                        putExtra("shapenumber",0)
+                    if (number.text.toString().toInt()==0) {
+                        putExtra("type", "circle")
+                        putExtra("number", number.text.toString().toInt())
                     }
-
-                    else if (shape[i]==1){
-                        putExtra("shapenumber",1)
+                    else if (number.text.toString().toInt()==1) {
+                        putExtra("type", "square")
+                        putExtra("number", number.text.toString().toInt())
                     }
-
-                    else if (shape[i]==2){
-                        putExtra("shapenumber",2)
+                    else if (number.text.toString().toInt()==2) {
+                        putExtra("type", "triangle")
+                        putExtra("number", number.text.toString().toInt())
                     }
-
-                    else if (shape[i]==3){
-                        putExtra("shapenumber",3)
+                    else if (number.text.toString().toInt()==3) {
+                        putExtra("type", "star")
+                        putExtra("number", number.text.toString().toInt())
                     }
                 }
                 startActivity(intent)
@@ -66,6 +65,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun generates(){
+        val shape = intArrayOf(R.drawable.circle, R.drawable.square, R.drawable.triangle, R.drawable.star)
+        val i:Int = (0..3).random()
+        number.text = i.toString()
 
-
+        imgNext.setImageResource(shape[i])
+    }
 }

@@ -36,4 +36,13 @@
         app:layout_constraintVertical_chainStyle="spread"
         app:srcCompat="@drawable/cover" />
 
+    <TextView
+        android:id="@+id/number"
+        android:layout_width="84dp"
+        android:layout_height="76dp"
+        android:text="TextView"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
