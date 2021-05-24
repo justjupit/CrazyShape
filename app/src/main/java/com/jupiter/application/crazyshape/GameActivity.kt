@@ -15,6 +15,23 @@ class GameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
+        val intent = getIntent()
+        val number:Int = intent.getIntExtra("shapenumber",0)
+
+        if (number==0){
+            txvMsg.text= "Please draw a Circle"
+        }
+        else if (number==1){
+            txvMsg.text= "Please draw a Square"
+        }
+        else if (number==2){
+            txvMsg.text= "Please draw a Triangle"
+        }
+       else if (number==3){
+            txvMsg.text= "Please draw a Star"
+        }
+
+
         btnBack.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?){
                 finish()

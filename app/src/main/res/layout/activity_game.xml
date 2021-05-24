@@ -9,7 +9,7 @@
     android:gravity="center">
 
     <TextView
-        android:id="@+id/Dra"
+        android:id="@+id/txvMsg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Drawing Canvas"
