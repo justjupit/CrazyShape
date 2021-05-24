@@ -18,19 +18,33 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        generate()
+
         val img: ImageView = findViewById(R.id.imgTitle)
         GlideApp.with(this)
             .load(R.drawable.cover)
             .override(800,600)
             .into(img)
 
+
+
         Toast.makeText(this,"Author = 陳義德",Toast.LENGTH_LONG).show()
         imgNext.setOnLongClickListener(object: View.OnLongClickListener{
             override fun onLongClick(p0: View): Boolean {
+
                 intent = Intent(this@MainActivity,GameActivity::class.java)
                 startActivity(intent)
+                recreate()
                 return true
             }
         })
+
+    }
+
+
+    private fun generate(){
+        val shape = intArrayOf(R.drawable.circle, R.drawable.square, R.drawable.triangle, R.drawable.star)
+        val i:Int = (0..3).random()
+        imgNext.setImageResource(shape[i])
     }
 }
