@@ -31,6 +31,13 @@ class MainActivity : AppCompatActivity() {
 
 
         Toast.makeText(this,"Author = 陳義德",Toast.LENGTH_LONG).show()
+
+        imgNext.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                imgNext.setImageResource(shape[i])
+            }
+        })
+
         imgNext.setOnLongClickListener(object: View.OnLongClickListener{
             override fun onLongClick(p0: View): Boolean {
 
