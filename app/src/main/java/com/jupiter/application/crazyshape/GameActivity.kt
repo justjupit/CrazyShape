@@ -20,9 +20,7 @@ class GameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
-        !btnBack.isEnabled()
-        !btnBack.isClickable()
-        !btnBack.isFocusable()
+        btnBack.setEnabled(false)
 
         val intent = getIntent()
         val number:Int = intent.getIntExtra("number",0)
@@ -49,11 +47,8 @@ class GameActivity : AppCompatActivity() {
                 Toast.makeText(this,"Your drawing is Wrong!", Toast.LENGTH_SHORT).show()
             }
             else if(outputs[0].label==type){
-
+                btnBack.setEnabled(true)
                 Toast.makeText(this,"Congratulations! You are Correct.", Toast.LENGTH_SHORT).show()
-                btnBack.isEnabled()
-                btnBack.isClickable()
-                btnBack.isFocusable()
             }
 
         }

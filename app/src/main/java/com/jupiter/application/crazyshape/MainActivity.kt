@@ -18,8 +18,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        generates()
 
+        generates()
 
         val img: ImageView = findViewById(R.id.imgTitle)
         GlideApp.with(this)
@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() {
 
         imgNext.setOnClickListener(object: View.OnClickListener{
             override fun onClick(v: View?) {
-
                 generates()
 
             }
@@ -39,26 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         imgNext.setOnLongClickListener(object: View.OnLongClickListener{
             override fun onLongClick(p0: View): Boolean {
-                intent = Intent(this@MainActivity,GameActivity::class.java).apply{
-                    if (number.text.toString().toInt()==0) {
-                        putExtra("type", "circle")
-                        putExtra("number", number.text.toString().toInt())
-                    }
-                    else if (number.text.toString().toInt()==1) {
-                        putExtra("type", "square")
-                        putExtra("number", number.text.toString().toInt())
-                    }
-                    else if (number.text.toString().toInt()==2) {
-                        putExtra("type", "triangle")
-                        putExtra("number", number.text.toString().toInt())
-                    }
-                    else if (number.text.toString().toInt()==3) {
-                        putExtra("type", "star")
-                        putExtra("number", number.text.toString().toInt())
-                    }
-                }
                 startActivity(intent)
-                recreate()
                 return true
             }
         })
@@ -68,7 +48,6 @@ class MainActivity : AppCompatActivity() {
     fun generates(){
         val shape = intArrayOf(R.drawable.circle, R.drawable.square, R.drawable.triangle, R.drawable.star)
         val i:Int = (0..3).random()
-        number.text = i.toString()
         val img2: ImageView = findViewById(R.id.imgNext)
         if(i==0){
             GlideApp.with(this)
@@ -94,6 +73,20 @@ class MainActivity : AppCompatActivity() {
                 .override(800,600)
                 .into(img2)
         }
-
+        intent = Intent(this@MainActivity,GameActivity::class.java).apply{
+            putExtra("number", i)
+            if (i==0) {
+                putExtra("type", "circle")
+            }
+            else if (i==1) {
+                putExtra("type", "square")
+            }
+            else if (i==2) {
+                putExtra("type", "triangle")
+            }
+            else if (i==3) {
+                putExtra("type", "star")
+            }
+        }
     }
 }
