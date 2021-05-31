@@ -23,26 +23,35 @@ class MainActivity : AppCompatActivity() {
 
         val img: ImageView = findViewById(R.id.imgTitle)
         GlideApp.with(this)
-            .load(R.drawable.cover)
-            .override(800,600)
-            .into(img)
+                .load(R.drawable.cover)
+                .override(800, 600)
+                .into(img)
 
-        Toast.makeText(this,"Author = 陳義德",Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Author = 陳義德", Toast.LENGTH_SHORT).show()
 
-        imgNext.setOnClickListener(object: View.OnClickListener{
+        imgNext.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 generates()
 
             }
         })
 
-        imgNext.setOnLongClickListener(object: View.OnLongClickListener{
+        imgNext.setOnLongClickListener(object : View.OnLongClickListener {
             override fun onLongClick(p0: View): Boolean {
-                startActivity(intent)
+                startActivityForResult(intent,99)
                 return true
             }
         })
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode==99){
+            intent = Intent(this@MainActivity,MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     fun generates(){
