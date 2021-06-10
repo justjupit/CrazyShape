@@ -9,10 +9,12 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import com.google.firebase.storage.FirebaseStorage
 import com.jupiter.application.crazyshape.ml.Shapes
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.android.synthetic.main.activity_game.view.*
 import org.tensorflow.lite.support.image.TensorImage
+import java.io.ByteArrayOutputStream
 
 
 class GameActivity : AppCompatActivity() {
@@ -65,11 +67,12 @@ class GameActivity : AppCompatActivity() {
                         val c = Canvas(b)
                         handv.draw(c)
                         classifyDrawing(b)
-
+                        SaveToStorage(b)
                     }
                 }
 
                 handv.invalidate()
+
                 return true
             }
 
@@ -88,6 +91,24 @@ class GameActivity : AppCompatActivity() {
                 handv.invalidate()
             }
         })
+    }
+    fun SaveToStorage(bmp:Bitmap){
+
+        val baos = ByteArrayOutputStream()
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val pictData = baos.toByteArray()
+
+        val filename = "images/pict.jpg"
+        val reference = FirebaseStorage.getInstance().getReference().child(filename)
+
+        reference.putBytes(pictData)
+                .addOnSuccessListener {
+                    Toast.makeText(baseContext, "Uploaded", Toast.LENGTH_SHORT).show()
+                }
+
+                .addOnFailureListener {
+                    Toast.makeText(baseContext, "Failed to Upload", Toast.LENGTH_SHORT).show()
+                }
     }
 
 }
